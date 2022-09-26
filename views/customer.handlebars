@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Quản lí Khách hàng</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/navBar.css">
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>(nav)}}
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="row my-3 d-flex justify-content">
+                <div class="col-md-8">
+                    <h1>Khách hàng</h1>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-lg themKhachHang-button" data-toggle="modal" data-target="#themKhachHang">
+                        <h3>
+                            <i class="fas fa-plus"></i>
+                            Thêm khách hàng
+                        </h3>
+                    </button>
+                </div>
+            </div>
+           <div class="row my-5">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Họ tên</th>
+                                <th scope="col">Địa chỉ</th>
+                                <th scope="col">SĐT</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Tổng nợ</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each customers}}
+                                <tr>
+                                    <th scope="row" id="{{this.MaKH}}-TenKH">{{this.TenKH}}</th>
+                                    <td id="{{this.MaKH}}-DiaChi">{{this.DiaChi}}</td>
+                                    <td id="{{this.MaKH}}-DienThoai">{{this.DienThoai}}</td>
+                                    <td id="{{this.MaKH}}-Email">{{this.Email}}</td>
+                                    <td id="{{this.MaKH}}-TienNo">{{this.TienNo}}</td>
+                                    <td>
+                                        
+                                        <button type="button" class="btn btn-lg suaKhachHang-button" data-toggle="modal" data-target="#suaKhachHang" value={{this.MaKH}}>
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-lg xoaKhachHang-button" data-toggle="modal" data-target="#xoaKhachHang" value={{this.MaKH}}>
+                                            <i class="fas fa-remove"></i>
+                                        </button>
+                                        {{#if this.TienNo}}
+                                        <button type="button" class="btn btn-lg lapPhieuThuTien-button" data-toggle="modal" data-target="#lapPhieuThuTien" value={{this.MaKH}}>
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </button>
+                                        {{/if}}
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="/js/drawChart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+            $('.lapPhieuThuTien-button').on('click', function(){
+                $('#lapPhieuThuTien-TenKH').text($('#' + $(this).val() + '-TenKH' ).text());
+                $('#lapPhieuThuTien-DiaChi').text($('#' + $(this).val() + '-DiaChi' ).text());
+                $('#lapPhieuThuTien-DienThoai').text($('#' + $(this).val() + '-DienThoai' ).text());
+                $('#lapPhieuThuTien-Email').text($('#' + $(this).val() + '-Email' ).text());
+            });
+            $('.xoaKhachHang-button').on('click', function(){
+                $('#xacnhan-xoaKhachHang').val($(this).val());
+            });
+            $('.suaKhachHang-button').on('click', function(){
+                $('#suaKhachHang-TenKH').val($('#' + $(this).val() + '-TenKH' ).text());
+                $('#suaKhachHang-DiaChi').val($('#' + $(this).val() + '-DiaChi' ).text());
+                $('#suaKhachHang-DienThoai').val($('#' + $(this).val() + '-DienThoai' ).text());
+                $('#suaKhachHang-Email').val($('#' + $(this).val() + '-Email' ).text());
+                $('#xacnhan-suaKhachHang').val($(this).val());
+            });
+        });
+    </script>
+
+    <!-- Modal Them khach hang -->
+    <div id="themKhachHang" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100">THÊM KHÁCH HÀNG</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/customer">
+                    <div class="form-group">
+                        <label for="TenKH">Tên khách hàng</label>
+                        <input type="text" class="form-control" name="TenKH" id="themKhachHang-TenKH">
+                    </div>
+                    <div class="form-group">
+                        <label for="DiaChi">Địa chỉ</label>
+                        <input type="text" class="form-control" name="DiaChi">
+                    </div>
+                    <div class="form-group">
+                        <label for="DienThoai">Điện Thoại</label>
+                        <input type="tel" pattern="[0-9]{10}" class="form-control" name="DienThoai">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" name="Email">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" id="xacnhan-themKhachHang">Xác nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Modal Lap phieu thu tien -->
+    <div id="lapPhieuThuTien" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100">LẬP PHIẾU THU TIỀN</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <b>Tên khách hàng</b>
+                <p class="text-dark" id="lapPhieuThuTien-TenKH">PTT-tenkh</p>
+                <b>Địa chỉ</b>
+                <p class="text-dark" id="lapPhieuThuTien-DiaChi">PTT-diachi</p>
+                <b>Địện thoại</b>
+                <p class="text-dark" id="lapPhieuThuTien-DienThoai">PTT-dienthoai</p>
+                <b>Email</b>
+                <p class="text-dark" id="lapPhieuThuTien-Email">PTT-email</p>
+                <form method="post" action="customer/invoice">
+                    <div class="form-group">
+                        <label for="MaHD"><b>Nhập mã hóa đơn</b></label>
+                        <input type="tel" pattern="[0-9]{1,}" class="form-control" name="MaHD">
+                    </div>
+                    <div class="form-group">
+                        <label for="SoTienThu"><b>Nhập số tiền thu</b></label>
+                        <input type="tel" pattern="[0-9]{4,}" class="form-control" name="SoTienThu">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" id="xacnhan-lapPhieuThuTien">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Modal Sua khach hang -->
+    <div id="suaKhachHang" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100">THAY ĐỔI THÔNG TIN KHÁCH HÀNG</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="customer?_method=PUT">
+                    <div class="form-group">
+                        <label for="TenKH">Tên khách hàng</label>
+                        <input type="text" pattern=".{1,}" class="form-control" id="suaKhachHang-TenKH" name="TenKH">
+                    </div>
+                    <div class="form-group">
+                        <label for="DiaChi">Địa chỉ</label>
+                        <input type="text" class="form-control" id="suaKhachHang-DiaChi" name="DiaChi">
+                    </div>
+                    <div class="form-group">
+                        <label for="DienThoai">Điện Thoại</label>
+                        <input pattern="[0-9]{10}" class="form-control" id="suaKhachHang-DienThoai" name="DienThoai">
+                    </div>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="email" class="form-control" id="suaKhachHang-Email" name="Email">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary" id="xacnhan-suaKhachHang" name="MaKH" value="">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    <!-- Modal Xoa khach hang -->
+    <div id="xoaKhachHang" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100">XÁC NHẬN XÓA KHÁCH HÀNG</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="customer?_method=DELETE">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-danger" id="xacnhan-xoaKhachHang" name="MaKH" value="">Xác Nhận</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    </div>
+    
+</body>
+
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Lập phiếu nhập sách</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/navBar.css">
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>(nav)}}
+        <!-- Page Content  -->
+        <div id="content">
+            <form method="post" action="" >
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="TenSach">Tên sách</label>
+                        <input type="text" class="form-control" name="TenSach">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="TacGia">Tác giả</label>
+                        <input type="text" class="form-control" name="TacGia">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="TheLoai">Thể loại</label>
+                        <input type="text" class="form-control" name="TheLoai">
+                    </div>
+                </div>
+                 <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="SoLuong">Số lượng nhập</label>
+                        <input type="numeric" class="form-control" name="SoLuong">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="DonGia">Đơn giá</label>
+                        <input type="numeric" class="form-control" name="DonGia">
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary" id= "xacnhan-nhapsach">Xác nhận</button>
+                </div>
+            </form>
+            <div class="row my-3 ">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <h3>Các loại sách nên nhập</h3>
+                </div>
+
+            </div>
+            <div class="row my-5">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tên sách</th>
+                                <th scope="col">Tác giả</th>
+                                <th scope="col">Thể loại</th>
+                                <th scope="col">Số lượng nhập</th>
+                                <th scope="col">Lượng tồn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each bookImport}}
+                                <tr>
+                                    <th scope="row" id="{{this.MaSach}}-TenSach">{{this.TenSach}}</th>
+                                    <td id="{{this.MaSach}}-TacGia">{{this.TacGia}}</td>
+                                    <td id="{{this.MaSach}}-TheLoai">{{this.TheLoai}}</td>
+                                    <td id="{{this.MaSach}}-SoLuong">{{this.SoLuong}}</td>
+                                    <td id="{{this.MaSach}}-LuongTon">{{this.LuongTon}}</td>
+                                </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="/js/drawChart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

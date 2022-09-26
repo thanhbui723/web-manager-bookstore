@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+
+.name{
+    position: absolute;
+    left: 9.7%;
+    top: 70%;
+}
+.container{
+    position: absolute;
+    left: 10%;
+    right: 17.8%;
+    top: 10%;
+    color: #000000;
+    font-size: 300px
+}
+.social-container{
+   display: flex;
+   position:absolute;
+   top:210px;
+   left:740px;
+}
+
+h1{
+    color: #000000;
+    position: absolute;
+    top: 130px;
+    left: 775px;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+h2{
+    color: #000000;
+    font-size: 80px;
+    
+}
+button {
+    border-radius: 20px;
+    border: 1px solid #161414;
+    background-color: #afafaf;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 35px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+button.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.form-container {
+    position: fixed;
+    top: 45%;
+    height: auto;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+    left: 750px;
+    width: 300px;
+    z-index: 2;
+}
+
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
+
+.sign-in{
+    position: absolute;
+    top: 470px;
+    left:840px;
+}

@@ -1,0 +1,79 @@
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3 style='color:black'>
+          <i class="fas fa-store-alt" style='font-size: 30px'></i>
+          Smile House
+        </h3>
+    </div>
+    <ul class="list-unstyled components">
+        <li class="{{#if active.home}}active{{/if}}">
+            <a href="/home">
+              <i class="fa fa-pie-chart" aria-hidden="true"></i>
+              Trang chính
+              </a>
+        </li>
+        <li class="{{#if active.bookLookUp}}active{{/if}}">
+            <a href="/bookLookUp">
+              <i class="fa fa-search " aria-hidden="true"></i>
+              Tra cứu Sách
+            </a>
+        </li>
+        
+        <li class="{{#if active.invoice}}active{{/if}}">
+            <a href="/invoice">
+              <i class="fas fa-file-invoice-dollar"></i>
+              Lập hóa đơn
+            </a>
+        </li>
+        
+        <li class="{{#if active.payment}}active{{/if}}">
+            <a href="/payment">
+              <i class="fa fa-money " aria-hidden="true"></i>
+              Phiếu thu tiền nợ
+            </a>
+        </li>
+        <li class="{{#if active.bookImport}}active{{/if}}">
+            <a href="/bookImport">
+              <i class="fa fa-upload " aria-hidden="true"></i>
+              Lập phiếu nhập
+            </a>
+        </li>
+        <li class="{{#if active.report}}active{{/if}}">
+            <a href="/report">
+                <i class="fa fa-bar-chart "></i>
+                Báo cáo
+            </a>
+        </li>
+        <li class="{{#if active.regulation}}active{{/if}}">
+            <a href="/regulation">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                Quy định
+            </a>
+        </li>
+        <li class="{{#if active.employee}}active{{/if}}">
+            <a href="/employee">
+              <i class="fa fa-user " aria-hidden="true"></i>
+              Quản lí tài khoản
+            </a>
+        </li>
+        
+        <li class="{{#if active.customer}}active{{/if}}">
+            <a href="/customer">
+              <i class="fa fa-user-circle " aria-hidden="true"></i>
+              Quản lí khách hàng
+            </a>
+        </li>
+        <li class="{{#if active.bookManagement}}active{{/if}}">
+            <a href="/bookManagement">
+              <i class="fa fa-book"></i>
+              Quản lí sách
+            </a>
+        </li>
+        <li>
+            <a href="/login">
+              <i class="fas fa-sign-out-alt"></i>
+                Đăng xuất
+            </a>
+        </li>
+    </ul>
+</nav>

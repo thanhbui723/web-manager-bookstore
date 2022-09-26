@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Smile House</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/navBar.css">
+    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        {{>(nav)}}
+        <!-- Page Content  -->
+        <div id="content" {{#if turnover}} class="modalOpen" {{/if}}>
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h2>
+                        <a href="/report/turnover">Báo cáo doanh thu</a>
+                        |
+                        <a href="/report/debt" class="text-secondary">Báo cáo công nợ</a>
+                    </h2>
+                </div>
+            </div>
+
+            <form method="post" action="/report/turnover">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row d-flex justify-content-center my-3">
+                            <div class="col-auto">
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto my-1">
+                                        <label class="mr-sm-2" for="inlineFormCustomSelect">Tháng</label>
+                                        <select name="month" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                            <option selected value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <label class="mr-sm-2" for="inlineFormCustomSelect">Năm</label>
+                                        <select name="year" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                            <option selected value="2022">2022</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <button type="submit" data-toggle="modal" data-target="#turnReport" class="btn btn-primary" id="makeReportBtn">
+                                    <i class="fas fa-plus"></i>
+                                    Lập báo cáo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="/assets/images/report.png" alt="" srcset="" height="200px">
+                    </div>
+            </form>
+            <div class="modal" tabindex="-1" role="dialog" id="turnoverReport">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Báo cáo doanh thu</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped" id="addModal">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Tên Khách hàng</th>
+                                        <th scope="col">Tổng tiền thanh toán</th>
+                                        <th scope="col">Thời gian</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modal-debt-body">
+                                    {{#each turnovers}}
+                                    <tr>
+                                        <th scope="row">{{this.TenKH}}</th>
+                                        <td>{{this.TongTien}}</td>
+                                        <td>{{dateFormat this.ThoiGian "DD.MM.YYYY"}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <!-- Popper.JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+            });
+            $(window).on('load', function () {
+                if ($('#content').hasClass('modalOpen')) {
+                    $('#turnoverReport').modal('show');
+                }
+            });
+        </script>
+</body>
+
+</html>
